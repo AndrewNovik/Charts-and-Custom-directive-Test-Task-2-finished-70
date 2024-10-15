@@ -1,11 +1,30 @@
+оригинальная кнопка
 <button
-  mat-raised-button
-  [tooltip]="'scnasdc kas'"
-  tooltipPosition="right"
-  tooltipTheme="dark"
+  mat-button
+  matTooltip
+  toolTip2
+  [isViewerDisabled]="checkIsViewerDisabled"
+  [viewerTooltip]="'Some Text'"
 >
   Disabled
 </button>
 
-<!-- [toolTipPosition]="'right'"
-    [toolTipTheme]="'light'" -->
+<br />
+
+<span>Is Viewer Disabled: </span>
+<input type="checkbox" (change)="change()" />
+
+<!-- <br />
+<br />
+<br />
+
+кнопка в диве
+<div
+  custom-mat-button
+  [isViewerDisabled]="checkIsViewerDisabled"
+  viewerTooltip="ToolTip"
+  buttonValue="Disabled"
+></div>
+
+<br />
+<br /> -->

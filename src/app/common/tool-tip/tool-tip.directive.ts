@@ -35,6 +35,10 @@ export class TooltipDirective {
     private injector: Injector
   ) {}
 
+  ngOnInit() {
+    console.log(this.elementRef);
+  }
+
   @HostListener('mouseenter')
   onMouseEnter(): void {
     this.initializeTooltip();

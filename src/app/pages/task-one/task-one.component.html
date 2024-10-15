@@ -55,18 +55,25 @@
       <p>Selected range: {{ range.value | json }}</p>
       }
     </div>
+    <div
+      *ngFor="let chart of sensor().sensors; let i = index"
+      class="col col-sm-12 col-md-6"
+    >
+      <div *ngIf="chart.selected">
+        <div class="d-flex justify-content-end align-items-center">
+          <span class="me-2">Line/Bar</span>
+          <label class="switch">
+            <input type="checkbox" (change)="changeChartType(i, $event)" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <highcharts-chart
+          [Highcharts]="Highcharts"
+          [options]="chartOptions[i]"
+          style="width: 100%; height: 100%; display: block"
+        ></highcharts-chart>
+      </div>
+    </div>
   </div>
 </div>
-
-<mat-grid-list cols="2" rowHeight="2:1">
-  @for (chart of sensor().sensors; track chart; let i = $index) { @if
-  (chart.selected) {
-  <mat-grid-tile
-    ><highcharts-chart
-      [Highcharts]="Highcharts"
-      [options]="chartOptions[i]"
-      style="width: 100%; height: 100%; display: block"
-    ></highcharts-chart
-  ></mat-grid-tile>
-  } }
-</mat-grid-list>
