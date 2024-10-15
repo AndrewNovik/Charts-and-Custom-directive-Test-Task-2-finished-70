@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-sm-6 col-md-6">
+      <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox
+            class="example-margin"
+            [checked]="sensor().selected"
+            [indeterminate]="partiallyChecked()"
+            (change)="update($event.checked)"
+          >
+            {{ sensor().name }}
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (sensors of sensor().sensors; track sensors; let i = $index) {
+            <li>
+              <mat-checkbox
+                [checked]="sensors.selected"
+                (change)="update($event.checked, i)"
+              >
+                {{ sensors.name }}
+              </mat-checkbox>
+            </li>
+            }
+          </ul>
+        </span>
+      </section>
+    </div>
+    <div class="col col-sm-6 col-md-6">
+      <mat-form-field>
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+          <input
+            matStartDate
+            formControlName="start"
+            placeholder="Start date"
+          />
+          <input matEndDate formControlName="end" placeholder="End date" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        @if (range.controls.start.hasError('matStartDateInvalid')) {
+        <mat-error>Invalid start date</mat-error>
+        } @if (range.controls.end.hasError('matEndDateInvalid')) {
+        <mat-error>Invalid end date</mat-error>
+        }
+      </mat-form-field>
+      @if (range.value.start && range.value.end) {
+      <p>Selected range: {{ range.value | json }}</p>
+      }
+    </div>
+  </div>
+</div>
+
+<mat-grid-list cols="2" rowHeight="2:1">
+  @for (chart of sensor().sensors; track chart; let i = $index) { @if
+  (chart.selected) {
+  <mat-grid-tile
+    ><highcharts-chart
+      [Highcharts]="Highcharts"
+      [options]="chartOptions[i]"
+      style="width: 100%; height: 100%; display: block"
+    ></highcharts-chart
+  ></mat-grid-tile>
+  } }
+</mat-grid-list>
