@@ -19,8 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export class CustomMatButtonDirective extends MatButton {
   @Input() isViewerDisabled!: boolean;
   @Input() viewerTooltip!: string;
-  @Input() buttonValue!: string;
-  private componentRef: ComponentRef<any> | null = null;
+  @Input() buttonValue: string = 'Disabled';
   constructor(elementRef: ElementRef, platform: Platform, ngZone: NgZone) {
     super(elementRef, platform, ngZone);
   }

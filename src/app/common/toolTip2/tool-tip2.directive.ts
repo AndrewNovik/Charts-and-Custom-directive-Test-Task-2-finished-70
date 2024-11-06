@@ -4,7 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Directive({
-  selector: '[toolTip2]',
+  selector: '[extendMatButton]',
   standalone: true,
 })
 export class ToolTip2Directive {
